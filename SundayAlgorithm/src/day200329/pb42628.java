@@ -2,9 +2,7 @@ package day200329;
 
 import static org.junit.Assert.assertArrayEquals;
 
-import java.util.ArrayDeque;
 import java.util.Collections;
-import java.util.Deque;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
@@ -25,27 +23,22 @@ public class pb42628 {
 	
 			if(op.equals("I")) {
 				minQue.offer(num);
+				maxQue.offer(num);
 			} else {
-				if(!minQue.isEmpty()) {
-					if(num == 1) {// 최대 값 삭제 : max que에 모으기
-						while(!minQue.isEmpty()) {
-							maxQue.offer(minQue.poll());
-						}
-						
-						maxQue.poll();
-					} else {// 최소 값 삭제 : min que에 모으기
-						while(!minQue.isEmpty()) {
-							minQue.offer(maxQue.poll());
-						}
-						minQue.poll();
+				if(!minQue.isEmpty() && !maxQue.isEmpty()) {
+					if(num == 1) {// 최대 값 삭제
+						int max = maxQue.poll();
+						minQue.remove(max);
+					} else {// 최소 값 삭제
+						int min = minQue.poll();
+						maxQue.remove(min);
 					}
 				}
 			}
 		}
 		
 		if(minQue.isEmpty() && maxQue.isEmpty()) return new int[] {0,0};
-		
-		minQue.poll(), 
+		return new int[] {maxQue.poll(), minQue.poll()};
 	}
 
 	@Test
@@ -53,7 +46,7 @@ public class pb42628 {
 		String[] operations1 = { "I 16","D 1" };
 		String[] operations2 = { "I 7","I 5","I -5","D -1"};
 
-		//assertArrayEquals(new int[] { 0, 0 }, solution(operations1));
+		assertArrayEquals(new int[] { 0, 0 }, solution(operations1));
 		assertArrayEquals(new int[] { 7, 5 }, solution(operations2));
 	}
 }

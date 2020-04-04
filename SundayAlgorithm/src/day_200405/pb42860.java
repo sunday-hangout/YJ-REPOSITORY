@@ -2,7 +2,7 @@ package day_200405;
 
 import org.junit.jupiter.api.Test;
 
-// 조이스
+// 조이스틱
 public class pb42860 {
 	public int solution(String name) {
 		int answer = 0;

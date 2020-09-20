@@ -30,8 +30,8 @@ public class pb02 {
         	node = node.next;
         }
         if(carry > 0) {
-        	ListNode listNode = new ListNode(carry);
-        	node.next = listNode;
+        	ListNode temp = new ListNode(carry);
+        	node.next = temp;
         }
         return answer.next;
 	}

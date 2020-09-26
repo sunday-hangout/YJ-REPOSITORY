@@ -24,8 +24,7 @@ var mergeTwoLists = function(l1, l2) {
         }
     }
     
-    array.sort();
-    console.log(array)
+    array.sort((a,b) => a - b);
     if(array.length === 0) return null;
     
     let answer = new ListNode(0);
